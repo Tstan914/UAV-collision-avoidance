@@ -47,6 +47,7 @@
  * @author Jaycee Lock,    <jaycee.lock@gmail.com>
  * @author Lorenz Meier,   <lm@inf.ethz.ch>
  * @author Tristan Sherman, <tristan.m.sherman@gmail.com>
+ *         Mitchell Caudle, Jimmy Lopez, Hana Haideri
  */
 
 
@@ -1403,7 +1404,7 @@ aircraftInfo() {
 	futureDistx [3] = {0};
 	futureDisty [3] = {0};
 	Hdg = 0;
-	safetyBubble = 10;  //Roughly 60 ft
+	safetyBubble = 25;  //Roughly 60 ft
 	priority = 0;
 
 }
@@ -1573,8 +1574,8 @@ CA_predict_thread()
 		//otherAircraft.lon[0] = adsb.lon;
 
 
-		otherAircraft.lat[0] = 33.9324539;
-		otherAircraft.lon[0] = -117.6311865;
+		otherAircraft.lat[0] = 33.932812;
+		otherAircraft.lon[0] = -117.631334;
 			
 		//Update our aircraft velocity (v) A
 		ourAircraft.velocityX[1] = ourAircraft.velocityX[0];
@@ -1981,7 +1982,7 @@ CA_Avoid( aircraftInfo & aircraftA, aircraftInfo & aircraftB, predictedCollision
 		avoidWaypoint = NewAvoidWaypoint(xDisplacement, yDisplacement, aircraftA);
 		insert_waypoint( avoidWaypoint, currentWaypoint);			
 
-			system("PAUSE");
+			//system("PAUSE");
 			printf("\n\n");
 
 			//Tell the aircraft to go to the waypoint
@@ -1989,6 +1990,7 @@ CA_Avoid( aircraftInfo & aircraftA, aircraftInfo & aircraftB, predictedCollision
 
 		printf("Collision point created\n");
 }
+
 
 
 

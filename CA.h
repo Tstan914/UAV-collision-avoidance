@@ -115,3 +115,4 @@ struct aircraftinfo {
 	uint8_t priority; 
 
 };
+
