@@ -1574,8 +1574,8 @@ CA_predict_thread()
 		//otherAircraft.lon[0] = adsb.lon;
 
 
-		otherAircraft.lat[0] = 33.932812;
-		otherAircraft.lon[0] = -117.631334;
+		otherAircraft.lat[0] = 33.9342275;
+		otherAircraft.lon[0] = -117.630861997;
 			
 		//Update our aircraft velocity (v) A
 		ourAircraft.velocityX[1] = ourAircraft.velocityX[0];
@@ -1804,7 +1804,7 @@ CA_Predict(aircraftInfo & aircraftA, aircraftInfo & aircraftB) {
 
 		//Creates a future position item based on the current position and future distance
 		mavlink_mission_item_t ourFuturePos = NewAvoidWaypoint(aircraftA.futureDistx[2], aircraftA.futureDisty[2], aircraftA);
-		printf("Predicted position: (%f, %f)\n", ourFuturePos.x, ourFuturePos.y);
+		//printf("Predicted position: (%f, %f)\n", ourFuturePos.x, ourFuturePos.y);
 
 		mavlink_mission_item_t otherFuturePos = NewAvoidWaypoint(aircraftB.futureDistx[2], aircraftB.futureDisty[2], aircraftB);
 		

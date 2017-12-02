@@ -71,6 +71,50 @@ using namespace std;
 
 #include "autopilot_interface.h"
 #include "serial_port.h"
+#include "UAV_Database.h"
+
+// ------------------------------------------------------------------------------
+//   Payload Object
+// ------------------------------------------------------------------------------
+
+class Payload_Drop{ //Made by Alex Winger and Zach Cheben
+private:
+    double time;			//The time it takes to get to the point we need to release the payload
+    double PLong;			//The longitude of the plane
+    double PLat;			//The latitude of the plane
+    double velocity;		//The velocity of the plane
+    double altitude;		//The alt of the plane
+    double targetDistance;	//The distance from the plane to the target
+    double dropDistance;	//The distance the payload drops once it is dropped
+    double distance;		//The distance from the plane to the point the payload should be dropped
+
+public:
+
+    double TLat;			//The latitude of the target
+    double TLong;			//The longitude of the target
+
+    Payload_Drop(double tlat, double tlong, double plat, double plong, double a);
+
+    void setGPSinfo(double plat, double plong, double a);		//Sets the GPS information of the plane
+    void setVelocity(int vx, int vy, int vz);
+
+    double timeToDrop(); //Returns the time it will take to reach the drop point
+
+    bool near_target(Autopilot_Interface &api, const int &radius); //Rudimentary code to drop payload. Use as last resort
+
+
+    /*
+     * Helper Functions
+     */
+    vector<Waypoint> payload_waypoints(const int &first_distance, const int &second_distance,
+                                       const double &angle); //Returns 3 waypoints
+    Waypoint meterDisplacement(const double & deltaX, const double & deltaY, const Waypoint & b);
+
+    double gpsDistance(const double &target_lat, const double &target_long, const double &current_lat,
+                       const double &current_long); //Function to convert latitude and longitude into a deistance (Measured in meters)
+
+};
+
 
 
 // ------------------------------------------------------------------------------
@@ -115,4 +159,5 @@ struct aircraftinfo {
 	uint8_t priority; 
 
 };
+
 

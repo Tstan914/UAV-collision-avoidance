@@ -323,14 +323,51 @@ set(SOURCE_FILES
         Mavlink/message.hpp
         Mavlink/msgmap.hpp
         Mavlink/protocol.h
+        serial_port.h
+		serial_port.cpp
+		CA.h
+		autopilot_interface.h
+		autopilot_interface.cpp
+		include/VehicleGlobalPosition.hpp
+		include/VehicleWaypointCommand.hpp
+		include/commproto.h
+		callback_struct.h
+		UAV_Database.h
+		include/soci.h
+		include/soci-mysql.h
+		UAV_Database.cpp
+		)
 
-        serial_port.h serial_port.cpp 
-	CA.cpp CA.h 
-	autopilot_interface.h autopilot_interface.cpp
-	)
+add_executable(CA ${SOURCE_FILES} CA.cpp)
 
-add_executable(CA ${SOURCE_FILES}
-        serial_port.h serial_port.cpp
-	autopilot_interface.h autopilot_interface.cpp
-        CA.h CA.cpp
-        )
+
+#Finding our libraries and add the directory so we can use target link to correctly link
+find_library(CommProtocol-Static HINTS "/usr/lib")
+include_directories(${CommProtocol-Static_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${CommProtocol-Static_LIBRARIES})
+
+find_library(cryptopp HINTS "/usr/lib")
+include_directories(${cryptopp_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${crytopp_LIBRARIES})
+
+find_library(soci_core HINTS "/usr/lib")
+include_directories(${soci_core_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${soci_core_LIBRARIES})
+
+find_library(soci_mysql HINTS "/usr/lib")
+include_directories(${soci_mysql_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${soci_mysql_LIBRARIES})
+
+
+
+#Link the specific libraries
+target_link_libraries(CA
+		libCommProtocol-Static.a
+		libcryptopp.a
+		liblibxbee3.so
+		libsoci_core.so
+		libsoci_mysql.so
+		libsoci_core.a
+		libsoci_mysql.a
+		${CMAKE_DL_LIBS}
+		)
