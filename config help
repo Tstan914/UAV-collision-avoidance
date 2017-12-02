@@ -1,0 +1,11 @@
+wp_radius of waypoints. How close does the plane have to get to them
+servo number for payload
+pwm value to drop payload
+first waypoint distance away from target in meters
+second waypoint distance away from target in meters
+angle of waypoints created
+target waypoint radius. How close to target before dropping
+database: 1 turning on database. 0 for turning it off
+target lat
+target long
+port of pixhawk
