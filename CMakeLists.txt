@@ -369,5 +369,7 @@ target_link_libraries(CA
 		libsoci_mysql.so
 		libsoci_core.a
 		libsoci_mysql.a
+		libmysqlclient.a
+		libz.a
 		${CMAKE_DL_LIBS}
 		)
